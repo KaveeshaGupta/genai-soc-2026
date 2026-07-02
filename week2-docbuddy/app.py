@@ -48,7 +48,7 @@ def index_documents(pdf_files):
     print(f"Indexed {total} total chunks")
     return f"✅ Indexed {len(pdf_files)} document(s) — {total} total chunks"
 
-def ask(question, history):
+def ask(question, history):  
     global vectorstore
 
     if vectorstore is None:

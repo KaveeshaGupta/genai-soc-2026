@@ -53,12 +53,13 @@ def build_messages(persona_name, api_history, user_message):
     return messages
 
 def respond(message, history, persona_name, temperature):
+    print("RAW GRADIO HISTORY:", history)
     history = history or []
     
     api_history = []
     for entry in history:
-        api_history.append({"role": "user", "content": entry["content"] if isinstance(entry, dict) else entry[0]})
-        api_history.append({"role": "assistant", "content": entry["content"] if isinstance(entry, dict) else entry[1]})
+        text = entry["content"][0]["text"] if isinstance(entry["content"], list) else entry["content"]
+        api_history.append({"role": entry["role"], "content": text})
     
     messages = build_messages(persona_name, api_history, message)
 
